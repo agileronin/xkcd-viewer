@@ -1,13 +1,11 @@
 import React from 'react';
 
-import Cartoon from './Cartoon';
-import ControlPanel from './ControlPanel';
+import CartoonViewer from './CartoonViewer';
 
 const App = () => {
   return (
   <div className="ui container" style={{marginTop: '5px'}}>
-      <Cartoon />
-      <ControlPanel />
+      <CartoonViewer />
   </div>
   );
 };

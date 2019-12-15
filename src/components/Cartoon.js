@@ -8,7 +8,7 @@ const HEADING = 'Brussels Sprouts Mandela Effect';
 
 const Cartoon = () => {
   return (
-    <div className="ui container segment">
+    <div>
       <h1 className="ui center aligned header">
         {HEADING}
         <div class="sub header">
