@@ -1,23 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import ControlPanel from './ControlPanel';
+import { fetchLatestCartoon } from '../actions';
 import { formatDate } from '../helpers';
 
-const DEFAULT_IMAGE =
-  'https://imgs.xkcd.com/comics/brussels_sprouts_mandela_effect.png';
-const HEADING = 'Brussels Sprouts Mandela Effect';
-
-const Cartoon = () => {
-  return (
-    <div>
-      <h1 className="ui center aligned header">
-        {HEADING}
-        <div class="sub header">
-          {formatDate(12,13,2019)}
+class Cartoon extends Component {
+  componentDidMount() {
+    this.props.fetchLatestCartoon();
+  }
+  render() {
+    console.log(this.props.cartoon);
+    if (this.props.cartoon !== null) {
+      const { month, day, year, safe_title, img } = this.props.cartoon;
+      return (
+        <div>
+          <h1 className="ui center aligned header">
+            {safe_title}
+            <div className="sub header">{formatDate(month, day, year)}</div>
+          </h1>
+          <ControlPanel />
+          <div className="ui divider"></div>
+          <img
+            className="ui centered image"
+            src={img}
+            alt={safe_title}
+          />
         </div>
-      </h1>
-      <img className="ui centered image" src={DEFAULT_IMAGE} alt={HEADING} />
-    </div>
-  );
+      );
+    } else {
+      return <div>Loading...</div>;
+    }
+  }
+}
+
+const mapStateToProps = state => {
+  return { cartoon: state.cartoon.currentCartoon };
 };
 
-export default Cartoon;
+export default connect(mapStateToProps, { fetchLatestCartoon })(Cartoon);

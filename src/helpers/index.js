@@ -1,6 +1,6 @@
 export const formatDate = (month, day, year) => {
   let monthString = '';
-  switch (month) {
+  switch (Number.parseInt(month)) {
     case 1:
       monthString = 'January';
       break;
